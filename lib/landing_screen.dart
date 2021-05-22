@@ -5,14 +5,14 @@ import './signInOptions_screen.dart';
 import 'Services/auth.dart';
 
 class LandingScreen extends StatefulWidget {
-  final AuthBase auth;
-  LandingScreen({@required this.auth});
+  final AuthBase auth; 
+  LandingScreen({@required this.auth});//AuthBase auth=new Auth();
   @override
   _LandingScreenState createState() => _LandingScreenState();
 }
 
 class _LandingScreenState extends State<LandingScreen> {
-  AppUser _user; //State Variable
+  AppUser _appUser; //State Variable
 
   @override
   //initState is called as part of Widget Creation life cycle
@@ -23,15 +23,15 @@ class _LandingScreenState extends State<LandingScreen> {
   }
 
   Future<void> _currentUser() async {
-    AppUser user = await widget.auth.currentUser();
-    _updateUser(user);
+    AppUser appUser = await widget.auth.currentUser();
+    _updateUser(appUser);
   }
 
-  void _updateUser(AppUser user) {
+  void _updateUser(AppUser appuUser) {
     //This method will be called after successful signIn
     setState(() {
       //Ealier _user value null & After successful signIn, _user variable has value.
-      _user = user;
+      _appUser = appuUser;
     });
   }
 
@@ -42,13 +42,11 @@ class _LandingScreenState extends State<LandingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if (_user == null)
+    if (_appUser == null)
       return SignInOptions(
         onSignIn: _updateUser,
-        auth: widget.auth,
+        auth: widget.auth,//auth object is in outside of _LandingScreenState class.
       );
-    return HomeScreen(
-      voidCallback: _setUser,
-    auth: widget.auth);
+    return HomeScreen(voidCallback: _setUser, auth: widget.auth);
   }
 }

@@ -33,7 +33,7 @@ class Intializer extends StatelessWidget {
           }
           if (snapshot.connectionState == ConnectionState.done) {
             return LandingScreen(
-              auth: Auth(),
+              auth: Auth(),//Passing Auth Class object to landing page
             );
           }
           return Scaffold(
