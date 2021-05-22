@@ -2,15 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:signup/Services/auth.dart';
 
 class HomeScreen extends StatelessWidget {
-  final Function voidCallback;
   final AuthBase auth;
-  HomeScreen({@required this.voidCallback,@required this.auth});
+  HomeScreen({@required this.auth});
 
   Future<void> _signOut() async {
     //log out when user press log out button
     await auth.signOut();
     //When a user logs out, call this callback method which will update landing page automatically
-    voidCallback();
   }
 
   @override

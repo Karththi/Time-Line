@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 
 abstract class AuthBase {
+  Stream<AppUser> get authStateChanges;
   Future<AppUser> signInAnonymously();
   Future<void> signOut();
   Future<AppUser> currentUser();
@@ -14,7 +15,14 @@ class AppUser {
 }
 
 class Auth implements AuthBase {
+  Stream<AppUser> get authStateChanges {
+    return FirebaseAuth.instance.authStateChanges().map(_userFromFirebase);
+  }
+
   AppUser _userFromFirebase(User user) {
+    if (user == null) {
+      return null;
+    }
     return AppUser(uid: user.uid);
   }
 
@@ -28,6 +36,6 @@ class Auth implements AuthBase {
   }
 
   Future<AppUser> currentUser() async {
-    return  _userFromFirebase(FirebaseAuth.instance.currentUser);
+    return _userFromFirebase(FirebaseAuth.instance.currentUser);
   }
 }

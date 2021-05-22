@@ -3,16 +3,15 @@ import 'package:flutter/material.dart';
 import 'Services/auth.dart';
 
 class SignInOptions extends StatelessWidget {
-  final Function(AppUser) onSignIn;
   final AuthBase auth;
   //SignInOptions class variable [ DataType-->Function(User) variableName-->onSignIn ]
   //onSignIn is a callback function
-  SignInOptions({@required this.onSignIn,@required this.auth}); //Named Constructor with Function<User> parameter
+  SignInOptions({@required this.auth}); //Named Constructor with Function<User> parameter
 
   Future<void> signInAnonymosly() async {
-    final user = await auth.signInAnonymously();
+    await auth.signInAnonymously();
     //Sign in annonymously & pass the user credentials to authResult
-    onSignIn(user);
+    
     //When a user signs in successfully, call this callback method which will update landing page automatically
   }
 
