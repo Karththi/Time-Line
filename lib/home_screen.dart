@@ -8,7 +8,6 @@ class HomeScreen extends StatelessWidget {
   Future<void> _signOut() async {
     //log out when user press log out button
     await auth.signOut();
-    //When a user logs out, call this callback method which will update landing page automatically
   }
 
   @override

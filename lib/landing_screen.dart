@@ -17,7 +17,7 @@ class LandingScreen extends StatelessWidget {
             if (appUser == null)
               return SignInOptions(
                 auth: 
-                    auth, //auth object is in outside of _LandingScreenState class.
+                    auth, 
               );
             return HomeScreen( auth: auth);
           }

@@ -4,15 +4,23 @@ import 'Services/auth.dart';
 
 class SignInOptions extends StatelessWidget {
   final AuthBase auth;
-  //SignInOptions class variable [ DataType-->Function(User) variableName-->onSignIn ]
-  //onSignIn is a callback function
-  SignInOptions({@required this.auth}); //Named Constructor with Function<User> parameter
 
-  Future<void> signInAnonymosly() async {
-    await auth.signInAnonymously();
-    //Sign in annonymously & pass the user credentials to authResult
-    
-    //When a user signs in successfully, call this callback method which will update landing page automatically
+  SignInOptions({@required this.auth}); //Named Constructor parameter
+
+  Future<void> _signInAnonymosly() async {
+    try {
+      await auth.signInAnonymously();
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  Future<void> _signInWithGoogle() async {
+    try {
+      await auth.signInWithGoogle();
+    } catch (e) {
+      print(e.toString());
+    }
   }
 
   @override
@@ -84,7 +92,7 @@ class SignInOptions extends StatelessWidget {
             ),
           ],
         ),
-        onPressed: () {});
+        onPressed: _signInWithGoogle);
   }
 
   Widget buildFacebookSignupButton() {
@@ -113,7 +121,7 @@ class SignInOptions extends StatelessWidget {
         ),
         color: Colors.white,
         textColor: Colors.purple[600],
-        onPressed: signInAnonymosly);
+        onPressed: _signInAnonymosly);
   }
 
   Widget buildWelcomeBack() {
